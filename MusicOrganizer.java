@@ -41,12 +41,39 @@ public class MusicOrganizer
      * List a file from the collection.
      * @param index The index of the file to be listed.
      */
-    public void listFile(int index)
+    public void listFile(int index, boolean validIndex)
     {
-        if(index >= 0 && index < files.size()) {
+        if(validIndex == true) {
             String filename = files.get(index);
             System.out.println(filename);
         }
+    }
+    
+    public void listAllFiles(){
+        for (String filename : files){
+            System.out.println(filename);
+        }
+    }
+    
+    public void listWithIndex(){
+        int position;
+        String filename;
+        for (int index = 0; index < files.size(); index++) {
+            filename = files.get(index);
+            System.out.println(index + ": " + filename);
+        }
+    }
+    
+    public boolean listMatching(String searchString)
+    {
+        for(String filename : files) {
+            if(filename.contains(searchString)) {
+                System.out.println(filename);
+                return true;
+            }
+        }
+        System.out.println("L");
+        return false;
     }
     
     /**
@@ -58,5 +85,15 @@ public class MusicOrganizer
         if(index >= 0 && index < files.size()) {
             files.remove(index);
         }
+    }
+    
+    public void checkIndex(int index){
+        if (index < 0 && index > files.size()){
+            System.out.println("the valid range is" + files.size());
+        }
+    }
+    
+    public boolean validIndex(int index){
+        return index >= 0 && index < files.size();
     }
 }
